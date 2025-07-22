@@ -56,3 +56,5 @@ class StaticSimpleDictionaryADT {
     return this.size === 0;
   }
 }
+
+export default StaticSimpleDictionaryADT;

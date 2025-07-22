@@ -35,3 +35,5 @@ class StaticQueueADT {
     return this.size === 0;
   }
 }
+
+export default StaticQueueADT;

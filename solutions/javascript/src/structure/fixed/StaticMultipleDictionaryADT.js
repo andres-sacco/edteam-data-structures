@@ -65,3 +65,5 @@ class StaticMultipleDictionaryADT {
     return this.size === 0;
   }
 }
+
+export default StaticMultipleDictionaryADT;

@@ -25,3 +25,5 @@ class DynamicStackADT {
     return this.stack.length === 0;
   }
 }
+
+export default DynamicStackADT;

@@ -25,3 +25,6 @@ class DynamicQueueADT {
     return this.queue.length === 0;
   }
 }
+
+
+export default DynamicQueueADT;

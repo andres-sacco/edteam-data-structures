@@ -59,3 +59,5 @@ class StaticPriorityQueueADT {
     return this.size === 0;
   }
 }
+
+export default StaticPriorityQueueADT;

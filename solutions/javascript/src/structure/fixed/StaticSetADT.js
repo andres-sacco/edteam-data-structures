@@ -43,3 +43,5 @@ class StaticSetADT {
     return this.size === 0;
   }
 }
+
+export default StaticSetADT;

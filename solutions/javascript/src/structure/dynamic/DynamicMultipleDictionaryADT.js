@@ -45,3 +45,5 @@ class DynamicMultipleDictionaryADT {
     return this.dict.size === 0;
   }
 }
+
+export default DynamicMultipleDictionaryADT;

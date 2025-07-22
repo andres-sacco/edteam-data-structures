@@ -50,3 +50,5 @@ class DynamicPriorityQueueADT {
     return this.front === null;
   }
 }
+
+export default DynamicPriorityQueueADT;

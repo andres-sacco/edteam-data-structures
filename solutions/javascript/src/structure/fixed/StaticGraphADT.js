@@ -62,3 +62,5 @@ class StaticGraphADT {
     return this.vertices.every(v => v === null);
   }
 }
+
+export default StaticGraphADT;

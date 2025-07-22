@@ -1,3 +1,5 @@
+import DynamicStackADT from "../dynamic/DynamicStackADT.js";
+
 class StaticStackADT {
   constructor(capacity) {
     this.capacity = capacity;
@@ -30,3 +32,5 @@ class StaticStackADT {
     return this.top === -1;
   }
 }
+
+export default StaticStackADT;

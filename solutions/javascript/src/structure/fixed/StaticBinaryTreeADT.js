@@ -38,3 +38,5 @@ class StaticBinaryTreeADT {
     this.size--;
   }
 }
+
+export default StaticBinaryTreeADT;

@@ -71,3 +71,5 @@ class DynamicBinaryTreeADT {
     return node;
   }
 }
+
+export default DynamicBinaryTreeADT;
