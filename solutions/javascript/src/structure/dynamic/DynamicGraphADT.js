@@ -1,4 +1,4 @@
-import DynamicSetADT from './DynamicSetADT'
+import DynamicSetADT from "../../structure/dynamic/DynamicSetADT.js";
 
 class DynamicGraphADT {
   constructor() {
@@ -20,7 +20,7 @@ class DynamicGraphADT {
   }
 
   addEdge(from, to, weight) {
-    if (this.vertices.contains(from) && this.vertices.contains(to)) {
+    if (this.vertices.exist(from) && this.vertices.exist(to)) {
       this.edges.push({ from, to, weight });
     }
   }

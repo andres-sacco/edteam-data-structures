@@ -1,3 +1,5 @@
+import StaticSetADT from "../../structure/fixed/StaticSetADT.js";
+
 class StaticGraphADT {
   constructor(maxVertices = 10) {
     this.maxVertices = maxVertices;
@@ -53,7 +55,7 @@ class StaticGraphADT {
   }
 
   getVertxs() {
-    const set = new SetADT();
+    const set = new StaticSetADT();
     for (const v of this.vertices) if (v !== null) set.add(v);
     return set;
   }
