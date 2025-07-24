@@ -18,12 +18,12 @@ class DynamicBinaryTreeADT:
             self.root = value
         elif value < self.root:
             if self.left is None:
-                self.left = BinaryTreeADT(value)
+                self.left = DynamicBinaryTreeADT(value)
             else:
                 self.left.add(value)
         else:
             if self.right is None:
-                self.right = BinaryTreeADT(value)
+                self.right = DynamicBinaryTreeADT(value)
             else:
                 self.right.add(value)
 

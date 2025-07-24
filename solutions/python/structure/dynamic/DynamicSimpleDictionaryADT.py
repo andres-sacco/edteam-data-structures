@@ -1,40 +1,65 @@
+from structure.dynamic.DynamicSetADT import DynamicSetADT
+
+
+class PairNode:
+    def __init__(self, key, value, next_node=None):
+        self.key = key
+        self.value = value
+        self.next = next_node
+
 class DynamicSimpleDictionaryADT:
     def __init__(self):
-        self.keys = []
-        self.values = []
+        self.keys = DynamicSetADT()
+        self.pairs_head = None  # Lista enlazada de PairNode
 
     def add(self, key, value):
-        index = self._index_of_key(key)
-        if index != -1:
-            self.values[index] = value  # Sobrescribe si ya existe
+        if self.keys.exist(key):
+            current = self.pairs_head
+            while current:
+                if current.key == key:
+                    current.value = value  # Sobrescribe
+                    return
+                current = current.next
         else:
-            self.keys.append(key)
-            self.values.append(value)
+            self.pairs_head = PairNode(key, value, self.pairs_head)
+            self.keys.add(key)
 
     def remove(self, key):
-        index = self._index_of_key(key)
-        if index != -1:
-            self.keys.pop(index)
-            self.values.pop(index)
+        if not self.keys.exist(key):
+            return
+
+        prev = None
+        current = self.pairs_head
+        while current:
+            if current.key == key:
+                if prev:
+                    prev.next = current.next
+                else:
+                    self.pairs_head = current.next
+                self.keys.remove(key)
+                return
+            prev = current
+            current = current.next
 
     def get(self, key):
-        index = self._index_of_key(key)
-        if index != -1:
-            return self.values[index]
-        raise KeyError(f"Clave {key} no encontrada.")
+        if not self.keys.exist(key):
+            raise KeyError(f"Clave {key} no encontrada.")
+
+        current = self.pairs_head
+        while current:
+            if current.key == key:
+                return current.value
+            current = current.next
+        raise KeyError(f"Clave {key} no encontrada.")  # Seguridad adicional
 
     def get_keys(self):
-        return list(self.keys)
+        return self.keys  # Devuelve el SetADT
 
     def is_empty(self):
-        return len(self.keys) == 0
-
-    def _index_of_key(self, key):
-        for i, k in enumerate(self.keys):
-            if k == key:
-                return i
-        return -1
+        return self.keys.isEmpty()
 
     def mostrar(self):
-        for k, v in zip(self.keys, self.values):
-            print(f"Clave: {k} -> Valor: {v}")
+        current = self.pairs_head
+        while current:
+            print(f"Clave: {current.key} -> Valor: {current.value}")
+            current = current.next

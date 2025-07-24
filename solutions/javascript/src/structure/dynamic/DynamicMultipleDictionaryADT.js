@@ -1,48 +1,97 @@
+import DynamicSetADT from "../../structure/dynamic/DynamicSetADT.js";
+
+class KeyNode {
+  constructor(key, valueSet, next = null) {
+    this.key = key;
+    this.valueSet = valueSet;
+    this.next = next;
+  }
+}
+
 class DynamicMultipleDictionaryADT {
   constructor() {
-    this.dict = new Map();
+    this.head = null;
   }
 
   add(key, value) {
-    if (!this.dict.has(key)) {
-      this.dict.set(key, []);
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.key === key) {
+        current.valueSet.add(value);
+        return;
+      }
+      current = current.next;
     }
-    const values = this.dict.get(key);
-    if (!values.includes(value)) {
-      values.push(value);
-    }
+
+    const newSet = new DynamicSetADT();
+    newSet.add(value);
+    this.head = new KeyNode(key, newSet, this.head);
   }
 
   remove(key) {
-    this.dict.delete(key);
+    if (this.head === null) return;
+
+    if (this.head.key === key) {
+      this.head = this.head.next;
+      return;
+    }
+
+    let prev = this.head;
+    let current = this.head.next;
+
+    while (current !== null) {
+      if (current.key === key) {
+        prev.next = current.next;
+        return;
+      }
+      prev = current;
+      current = current.next;
+    }
   }
 
   removeValue(key, value) {
-    if (this.dict.has(key)) {
-      const values = this.dict.get(key);
-      const index = values.indexOf(value);
-      if (index !== -1) {
-        values.splice(index, 1);
-        if (values.length === 0) {
-          this.dict.delete(key);
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.key === key) {
+        current.valueSet.remove(value);
+        if (current.valueSet.isEmpty()) {
+          this.remove(key);
         }
+        return;
       }
+      current = current.next;
     }
   }
 
   get(key) {
-    if (!this.dict.has(key)) {
-      throw new Error("Clave no encontrada");
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.key === key) {
+        return current.valueSet; // Devuelve el DynamicSetADT
+      }
+      current = current.next;
     }
-    return this.dict.get(key);
+
+    throw new Error("Clave no encontrada");
   }
 
   getKeys() {
-    return Array.from(this.dict.keys());
+    const keys = new DynamicSetADT();
+    let current = this.head;
+
+    while (current !== null) {
+      keys.add(current.key);
+      current = current.next;
+    }
+
+    return keys;
   }
 
   isEmpty() {
-    return this.dict.size === 0;
+    return this.head === null;
   }
 }
 
